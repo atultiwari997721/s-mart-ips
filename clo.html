@@ -1120,11 +1120,11 @@
         <button class="category-btn" onclick="openCategoryUrl('stationery')">
           Stationery
         </button>
-        <button class="category-btn" onclick="openCategoryUrl('Clothes')">
-          Clothes
-        </button>
-        <button class="category-btn" onclick="openCategoryUrl('Electronics')">
+        <button class="category-btn" onclick="openCategoryUrl('electronics')">
           Electronics
+        </button>
+        <button class="category-btn" onclick="openCategoryUrl('clothes')">
+          Clothes
         </button>
       </div>
     </div>
@@ -1133,8 +1133,7 @@
       <!-- Product cards will be inserted here dynamically -->
     </div>
     <marquee behavior="scroll" direction="left"
-      >Radhe Krishna Visit again! We are constantly adding new
-      products!</marquee
+      >Thank You! Visit again! We are constantly adding new products!</marquee
     >
     <div class="request-section">
       <p>Can't find what you're looking for?</p>
@@ -1296,254 +1295,7 @@
 
       // Product data - This is the single place to manage product information
       const productsData = [
-          {
-          code:"el1",
-          name: 'OREVA SCIENTIFIC CALCULATOR 750MS',
-          description: "Large  High Quality Clothe White Shirt For College",
-          price: 469,
-          marketPrice: 550,
-          images:['productpic/oreva750.jpeg','productpic/oreva7502.jpeg'],
-          offer: "300 less them Market",
-        },
-         {
-          code:"el2",
-          name: 'CASIO 991MS SCIENTIFIC CALCULATOR',
-          description: "Large  High Quality Clothe White Shirt For College",
-          price: 1169,
-          marketPrice: 1295,
-          images:['productpic/casio2.jpeg','productpic/casio1.jpeg','productpic/casio3.jpeg'],
-          offer: "300 less them Market",
-        },
-  
-         {
-          code:"cl02",
-          name: 'White Shirt ( L)',
-          description: "Large  High Quality Clothe White Shirt For College",
-          price: 369,
-          marketPrice: 699,
-          images:['productpic/white_shirt_front.jpeg','productpic/white_shirt.jpeg'],
-          offer: "300 less them Market",
-        },
-
-        {
-          code: "S012",
-          name: "Pentonic Pen 10 Unit Blue pen",
-          description: "Pentonic Pen 10 Unit Blue pen ",
-          price: 94,
-          marketPrice: 100, // Added market price
-          images: ["productpic/pentonic_pack10.png"],
-          offer: "₹11 Less than Market",
-          // Mark this product as revealing soon
-          productCouponCode: "S-MartForHolkarStudent", // Specific coupon code for this product
-          discountType: "nill", // "fixed" or "percentage"
-          discountValue: 10, // 20 rupees off
-        },
-        {
-          code: "S016",
-          name: "Sticky Notes 100 Sheets",
-          description: "Best Quality Sticky Notes 100 Sheets",
-          price: 29,
-          marketPrice: 55, // Added market price
-          images: [
-            "productpic/sticky _notespink.png",
-            "productpic/Sticky_notesBack.jpeg",
-          ],
-          offer: "₹30 Less than Market",
-          // Mark this product as revealing soon
-          productCouponCode: "S-MartForHolkarStudent", // Specific coupon code for this product
-          discountType: "nill", // "fixed" or "percentage"
-          discountValue: 10, // 20 rupees off
-        },
-        /*{
-          code: "S017",
-          name: "Sticky Notes 5 cut",
-          description: "Best Quality Sticky Notes 100 Sheets",
-          price: 19,
-          marketPrice: 30, // Added market price
-          images: ["productpic/sticky_notes5Cut.png"],
-          offer: "₹11 Less than Market",
-          // Mark this product as revealing soon
-          productCouponCode: "S-MartForHolkarStudent", // Specific coupon code for this product
-          discountType: "nill", // "fixed" or "percentage"
-          discountValue: 10, // 20 rupees off
-        },*/
-        {
-          code: "S005",
-          name: "Spiral Notebook 200 Page",
-          description: "Spiral Notebook 200 page",
-          price: 59,
-          marketPrice: 80, // Added market price
-          images: [
-            "productpic/spiralNotebook200page.png",
-            "productpic/Spiral200pagesPic2.png",
-          ],
-          offer: "₹31 Less than Market",
-          // Mark this product as revealing soon
-          productCouponCode: "S-MartForHolkarStudent", // Specific coupon code for this product
-          discountType: "nill", // "fixed" or "percentage"
-          discountValue: 10, // 20 rupees off
-        },
-
-        {
-          code: "S006",
-          name: "Spiral Notebook 300 page",
-          description: "Spiral Notebook 300 page",
-          price: 79,
-          marketPrice: 120, // Added market price
-          images: [
-            "productpic/spiral300pageFront.png",
-            "productpic/SpiralPageQuality.jpg",
-          ],
-
-          offer: "₹51 Less than Market",
-          // Mark this product as revealing soon
-          productCouponCode: "H10",
-          discountType: "Nill",
-          discountValue: 10, // 10% off
-        },
-        /*{
-          code: "S007",
-          name: "Spiral 400 page",
-          description: "Spiral 400 page",
-          price: 89,
-          marketPrice: 140, // Added market price
-          images: [
-            "productpic/Spiral400page.png",
-            "productpic/SpiralPageQuality.jpg",
-          ],
-          offer: "₹51 Less than Market",
-         
-          // Mark this product as revealing soon
-          productCouponCode: "LAPTOPBAG",
-          discountType: "Nill",
-          discountValue: 50, // 50 rupees off
-        },*/
-        {
-          code: "S008",
-          name: "Spiral 500 page",
-          description: "Spiral 500 page",
-          price: 129,
-          marketPrice: 220, // Added market price
-          images: [
-            "productpic/Spiral500page.jpg",
-            "productpic/SpiralPageQuality.jpg",
-          ],
-          offer: "₹101 Less than Market",
-
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-
-        /* {
-          code: "S002",
-          name: "Rough Notebook 300 Page",
-          description: "A3 Size Rough Notebook 300 Page Premium Quality Pages ",
-          price: 49,
-          marketPrice: 90, // Added market price
-          images: [
-            "productpic/Rough300pageFront.png",
-            "prodctpic/RoughA3300pageprimium.png",
-            "productpic/pageQualityA4Notebook.png",
-          ],
-          offer: "₹41 Less than Market",
-
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },*/
-        {
-          code: "S003",
-          name: "Rough Notebook 400 Page",
-          description: "A3 Size Rough Notebook 400 Page Premium Quality Pages ",
-          price: 86,
-          marketPrice: 110, // Added market price
-          images: [
-            "productpic/Rough400PageFront2A3.png",
-            "productpic/Rough400PageFront.png",
-            "productpic/pageQualityA4Notebook.png",
-          ],
-          offer: "₹41 Less than Market",
-
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-        {
-          code: "S004",
-          name: "Rough Notebook 500 Page",
-          description: "A3 Size Rough Notebook 500 Page Premium Quality Pages ",
-          price: 96,
-          marketPrice: 140, // Added market price
-          images: [
-            "productpic/RoughNotebook500page2.png",
-            "productpic/Rough500pageFront.png",
-            "productpic/pageQualityA4Notebook.png",
-          ],
-          offer: "₹51 Less than Market",
-
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-        {
-          code: "S001",
-          name: "Rough Notebook 200 Page",
-          description: "A3 Size Rough Notebook 200 Page Rough Pages ",
-          price: 54,
-          marketPrice: 70, // Added market price
-          images: [
-            "productpic/roughA3pic2200page.png",
-            "productpic/roughA3200page.png",
-          ],
-          offer: "₹31 Less than Market",
-          // Not revealing soon
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-        {
-          code: "S010",
-          name: "Assignment Notebook ",
-          description: "Assignment Notebook 50-64 Page ",
-          price: 19,
-          marketPrice: 30, // Added market price
-          images: ["productpic/30rsNotebook.png"],
-          offer: "₹11 Less than Market",
-          // Not revealing soon
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-        {
-          code: "S011",
-          name: "Assignment Notebook 92 Page",
-          description: "Assignment Notebook 92 Page",
-          price: 29,
-          marketPrice: 40, // Added market price
-          images: [
-            "productpic/AssignmentNotebook92PageFront.png",
-            "productpic/92 page Notebook front2.png",
-          ],
-          offer: "₹11 Less than Market",
-          // Not revealing soon
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
-        {
-          code: "S009",
-          name: "Assignment Notebook 164 Page",
-          description: "Notebook 164 Page Best For Assignment ",
-          price: 44,
-          marketPrice: 70, // Added market price
-          images: ["productpic/AssignmentNotebook60PageA4.png"],
-          offer: "₹31 Less than Market",
-          // Not revealing soon
-          productCouponCode: "MOUSEBOGO",
-          discountType: "Nill",
-          discountValue: 0, // No discount
-        },
+        
            {
           code:"cl01",
           name: 'White Shirt ( XL , XXL)',
@@ -1553,6 +1305,15 @@
           images:['productpic/white_shirt_front.jpeg','productpic/white_shirt.jpeg'],
           offer: "300 less them Market",
 
+        },
+         {
+          code:"cl02",
+          name: 'White Shirt ( L)',
+          description: "Large  High Quality Clothe White Shirt For College",
+          price: 369,
+          marketPrice: 699,
+          images:['productpic/white_shirt_front.jpeg','productpic/white_shirt.jpeg'],
+          offer: "300 less them Market",
         },
          {
           code:"cl03",
@@ -2112,7 +1873,7 @@
           return;
         }
 
-        let message = `Hello S-Mart! I'd like to request an item. i am from IPS Academy \n\n`;
+        let message = `Hello S-Mart! I'd like to request an item.\n\n`;
         message += `Name: ${name}\n`;
         message += `WhatsApp: ${whatsapp}\n\n`;
         message += `Item Details:\n${details}`;
@@ -2139,10 +1900,10 @@
           case "stationery":
             url = "st.html"; // Placeholder URL
             break;
-          case "Electronics":
+          case "electronics":
             url = "ele.html"; // Placeholder URL
             break;
-          case "Clothes":
+          case "clothes":
             url = "clo.html"; // Placeholder URL
             break;
           default:
