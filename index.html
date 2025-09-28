@@ -191,6 +191,22 @@
         flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
         justify-content: center; /* Center buttons when wrapped */
       }
+      .tagline-buttons .notes-btn
+      {background: var(--dark-bg);
+        color: orange;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;}
+    
+      .tagline-buttons .notes-btn:hover {
+        background:orange;
+        color: green;
+        transform: translateY(-2px);
+      }
       .tagline-buttons .category-btn {
         background: var(--dark-bg);
         color: var(--white);
@@ -1125,6 +1141,9 @@
         </button>
         <button class="category-btn" onclick="openCategoryUrl('Electronics')">
           Electronics
+        </button>
+        <button class="notes-btn" onclick="openCategoryUrl('notes')">
+          1st Year Notes 
         </button>
       </div>
     </div>
@@ -2170,6 +2189,9 @@
             break;
           case "Clothes":
             url = "clo.html"; // Placeholder URL
+            break;
+          case 'notes':
+            url = "notes.html";
             break;
           default:
             url = "index.html"; // Default URL
