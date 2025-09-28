@@ -1,28 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>S-Mart</title>
-    <link rel="icon" href="/productpic/pic.jpeg" type="image/x-icon" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-</head>
-<body>
+    <title>S-Mart Notes Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
     <style>
-        #h1{
-            background-color: red;
-            color: orange;
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50e3c2;
+            --danger-color: #e74c3c;
+            --dark-bg: #2c3e50;
+            --text-color: #34495e;
+            --light-bg: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: "Montserrat", sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: "Montserrat", sans-serif;
+            color: var(--dark-bg);
+            margin-bottom: 2rem;
+        }
+        
+        /* Page display logic */
+        .page {
+            display: none; /* Hide all pages by default */
+        }
+        .page.active {
+            display: block; /* Show only the active page */
+        }
+
+        /* Button Styles */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-width: 200px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .branch-btn { background: var(--primary-color); color: var(--white); }
+        .branch-btn:hover { background: #3a7ccb; }
+        
+        .semester-btn { background: var(--secondary-color); color: var(--dark-bg); }
+        .semester-btn:hover { background: #41d5b8; }
+
+        .material-btn { background: var(--danger-color); color: var(--white); }
+        .material-btn:hover { background: #cc332c; }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* PDF List Styling */
+        .pdf-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        .pdf-list li {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .pdf-list a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+            border-radius: 8px;
+        }
+        .pdf-list a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .no-pdf {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #777;
+            margin-top: 3rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background-color: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+            font-size: 0.9rem;
         }
     </style>
+</head>
+<body>
+    <header>
+        <div class="logo">S-Mart Notes</div>
+    </header>
 
-    <h1>1st Year Notes </h1>
-    <h2>This Page is under Devlopment ComingSoon...</h2>
+    <!-- Page 1: Branch Selection -->
+    <div id="page-branch" class="page active">
+        <div class="container">
+            <h1>Select Your Branch</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn branch-btn" onclick="selectBranch('CSE')">CSE</button>
+                <button class="nav-btn branch-btn" onclick="selectBranch('Chemical')">Chemical</button>
+                <button class="nav-btn branch-btn" onclick="selectBranch('ECE')">ECE</button>
+                <button class="nav-btn branch-btn" onclick="selectBranch('Civil')">Civil</button>
+            </div>
+        </div>
+    </div>
 
-    
+    <!-- Page 2: Semester Selection -->
+    <div id="page-semester" class="page">
+        <div class="container">
+            <div class="breadcrumb"><a onclick="showPage('page-branch')">Home</a> &gt; <span id="branch-name-sem"></span></div>
+            <h1>Select Semester</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn semester-btn" onclick="selectSemester(1)">Semester 1</button>
+                <button class="nav-btn semester-btn" onclick="selectSemester(2)">Semester 2</button>
+            </div>
+        </div>
+    </div>
 
-    
+    <!-- Page 3: Material Type Selection -->
+    <div id="page-materials" class="page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a onclick="showPage('page-branch')">Home</a> &gt; 
+                <a id="branch-link-mat" onclick="showPage('page-semester')">Branch</a> &gt; 
+                <span id="semester-name-mat"></span>
+            </div>
+            <h1>Select Material Type</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn material-btn" onclick="selectMaterialType('notes')">Notes</button>
+                <button class="nav-btn material-btn" onclick="selectMaterialType('pyq')">Previous Year Paper</button>
+                <button class="nav-btn material-btn" onclick="selectMaterialType('mst1')">MST-1</button>
+                <button class="nav-btn material-btn" onclick="selectMaterialType('mst2')">MST-2</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: PDF Viewer -->
+    <div id="page-pdf" class="page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a onclick="showPage('page-branch')">Home</a> &gt; 
+                <a id="branch-link-pdf" onclick="showPage('page-semester')">Branch</a> &gt; 
+                <a id="semester-link-pdf" onclick="showPage('page-materials')">Semester</a> &gt;
+                <span id="material-name-pdf">Material</span>
+            </div>
+            <h1 id="pdf-page-title">Available Documents</h1>
+            <ul class="pdf-list" id="pdf-container">
+                <!-- PDF links will be inserted here by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 S-Mart. Your one-stop for academic resources.</p>
+    </footer>
+
+    <script>
+        // --- State Variables ---
+        // These variables will store the user's choices as they navigate.
+        let currentBranch = '';
+        let currentSemester = '';
+        let currentMaterialType = '';
+
+        // --- PDF Data Store ---
+        // Add all your PDF links in this structured object.
+        // Use a placeholder '#' if you don't have the file yet.
+        const pdfData = {
+            'CSE': {
+                '1': {
+                    'notes': [
+                        { name: 'Introduction to C Programming Notes', url: '#' },
+                        { name: 'Digital Logic Design - Unit 1', url: '#' }
+                    ],
+                    'pyq': [{ name: '2024 End Semester Exam Paper', url: '#' }],
+                    'mst1': [{ name: 'CSE MST-1 Question Paper 2024', url: '#' }],
+                    'mst2': [] // Example of no PDFs in a category
+                },
+                '2': {
+                    'notes': [{ name: 'Data Structures Complete Notes', url: '#' }],
+                    'pyq': [], 'mst1': [], 'mst2': []
+                }
+            },
+            'Chemical': {
+                '1': { 'notes': [{ name: 'Intro to Chemical Engg Notes', url: '#' }], 'pyq': [], 'mst1': [], 'mst2': [] },
+                '2': { 'notes': [], 'pyq': [], 'mst1': [], 'mst2': [] }
+            },
+            'ECE': {
+                '1': { 'notes': [{ name: 'Basic Electronics - Notes', url: '#' }], 'pyq': [], 'mst1': [], 'mst2': [] },
+                '2': { 'notes': [], 'pyq': [], 'mst1': [], 'mst2': [] }
+            },
+            'Civil': {
+                '1': { 'notes': [{ name: 'Engineering Mechanics Notes', url: '#' }], 'pyq': [], 'mst1': [], 'mst2': [] },
+                '2': { 'notes': [], 'pyq': [], 'mst1': [], 'mst2': [] }
+            }
+        };
+
+        const materialTypeMap = {
+            'notes': 'Notes',
+            'pyq': 'Previous Year Papers',
+            'mst1': 'MST-1 Papers',
+            'mst2': 'MST-2 Papers'
+        };
+
+        // --- Core Navigation Function ---
+        /**
+         * Hides all pages and shows only the one with the specified ID.
+         * @param {string} pageId The ID of the page div to display.
+         */
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show the requested page
+            const pageToShow = document.getElementById(pageId);
+            if (pageToShow) {
+                pageToShow.classList.add('active');
+            }
+            window.scrollTo(0, 0); // Scroll to top on page change
+        }
+
+        // --- Selection Logic Functions ---
+        
+        /**
+         * Called when a user clicks a branch button.
+         * Stores the choice and navigates to the semester selection page.
+         */
+        function selectBranch(branch) {
+            currentBranch = branch;
+            document.getElementById('branch-name-sem').textContent = currentBranch;
+            showPage('page-semester');
+        }
+
+        /**
+         * Called when a user clicks a semester button.
+         * Stores the choice and navigates to the material type selection page.
+         */
+        function selectSemester(semester) {
+            currentSemester = semester;
+            // Update breadcrumbs on the next page
+            document.getElementById('branch-link-mat').textContent = currentBranch;
+            document.getElementById('semester-name-mat').textContent = `Semester ${currentSemester}`;
+            showPage('page-materials');
+        }
+
+        /**
+         * Called when a user clicks a material type button.
+         * Stores the choice, generates the PDF list, and shows the PDF viewer page.
+         */
+        function selectMaterialType(type) {
+            currentMaterialType = type;
+            
+            // Update breadcrumbs on the final page
+            document.getElementById('branch-link-pdf').textContent = currentBranch;
+            document.getElementById('semester-link-pdf').textContent = `Semester ${currentSemester}`;
+            document.getElementById('material-name-pdf').textContent = materialTypeMap[currentMaterialType];
+            
+            // Set the page title
+            document.getElementById('pdf-page-title').textContent = `${materialTypeMap[currentMaterialType]} - ${currentBranch} Sem ${currentSemester}`;
+            
+            // Get the container for PDF links
+            const pdfContainer = document.getElementById('pdf-container');
+            pdfContainer.innerHTML = ''; // Clear any previous list
+
+            // Find the correct list of PDFs from our data store
+            const pdfs = pdfData[currentBranch]?.[currentSemester]?.[currentMaterialType];
+
+            if (pdfs && pdfs.length > 0) {
+                pdfs.forEach(pdf => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = pdf.url;
+                    link.textContent = pdf.name;
+                    link.target = '_blank'; // Open PDF in a new tab
+                    listItem.appendChild(link);
+                    pdfContainer.appendChild(listItem);
+                });
+            } else {
+                // Display a message if no PDFs are found
+                pdfContainer.innerHTML = '<p class="no-pdf">Sorry, no documents are available in this section yet.</p>';
+            }
+
+            showPage('page-pdf');
+        }
+
+        // --- Initial Load ---
+        // Ensure the branch selection page is shown when the page first loads.
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('page-branch');
+        });
+    </script>
 </body>
 </html>
