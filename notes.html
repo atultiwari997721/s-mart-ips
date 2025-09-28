@@ -123,20 +123,36 @@
             margin-bottom: 1rem;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .pdf-list a {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 1rem 1.5rem;
+        }
+        .pdf-list .pdf-name {
             color: var(--dark-bg);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: background 0.3s ease, color 0.3s ease;
-            border-radius: 8px;
+            transition: color 0.3s ease;
+            flex-grow: 1;
+            padding-right: 1rem;
         }
-        .pdf-list a:hover {
-            background: var(--primary-color);
-            color: var(--white);
+        .pdf-list .pdf-name:hover {
+            color: var(--primary-color);
+        }
+        .pdf-list .download-btn {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+        .pdf-list .download-btn:hover {
+            background: #41d5b8;
         }
         .no-pdf {
             text-align: center;
@@ -237,7 +253,7 @@
             'CSE': {
                 '1': {
                     'notes': [
-                        { name: 'Introduction to C Programming Notes', url: '#' },
+                        { name: 'Introduction to C Programming Notes', url: 'Notes/CSE/3rdsem.pdf' },
                         { name: 'Digital Logic Design - Unit 1', url: '#' }
                     ],
                     'pyq': [{ name: '2024 End Semester Exam Paper', url: '#' }],
@@ -337,11 +353,24 @@
             if (pdfs && pdfs.length > 0) {
                 pdfs.forEach(pdf => {
                     const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = pdf.url;
-                    link.textContent = pdf.name;
-                    link.target = '_blank'; // Open PDF in a new tab
-                    listItem.appendChild(link);
+
+                    // Create the link to view the PDF
+                    const viewLink = document.createElement('a');
+                    viewLink.href = pdf.url;
+                    viewLink.textContent = pdf.name;
+                    viewLink.className = 'pdf-name';
+                    viewLink.target = '_blank';
+
+                    // Create the download button
+                    const downloadBtn = document.createElement('a');
+                    downloadBtn.href = pdf.url;
+                    downloadBtn.textContent = 'Download';
+                    downloadBtn.className = 'download-btn';
+                    downloadBtn.setAttribute('download', ''); // Triggers download
+
+                    // Append both to the list item
+                    listItem.appendChild(viewLink);
+                    listItem.appendChild(downloadBtn);
                     pdfContainer.appendChild(listItem);
                 });
             } else {
@@ -360,3 +389,4 @@
     </script>
 </body>
 </html>
+
